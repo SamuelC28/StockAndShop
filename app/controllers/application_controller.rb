@@ -25,7 +25,6 @@ class ApplicationController < ActionController::Base
     def current_user
         User.find_by(id: session[:user_id]) if session[:user_id]
     end  
-    # include CurrentCart
 
 
   # before_action :current_cart
@@ -54,23 +53,14 @@ class ApplicationController < ActionController::Base
     #   end
     # end
 
-    def add_to_cart
-
-      # if session[:cart]
-      #   @cart = session[:cart]
-      # else
-      #   session[:cart] = []
-      #   @cart = session[:cart]
-      # end
-
-    end
-    def total
-      i=1
-      total=0
-      @cart.all.each do |item|
-        i=i+1
-        total=total + item.quantity * item.unit_price
-      end
-      total
-  end
+   
+  #   def total
+  #     i=1
+  #     total=0
+  #     @cart.all.each do |item|
+  #       i=i+1
+  #       total=total + item.quantity * item.unit_price
+  #     end
+  #     total
+  # end
 end

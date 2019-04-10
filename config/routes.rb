@@ -9,42 +9,18 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show,:new, :create]
   resources :addresses
-  # resources :line_items
-  # resources :carts
+
   resources :items
+  get '/items/:id/item_data', to: 'items#item_data'
+
   resources :categories  
-  
-  
 
-get 'carts/:id' => "carts#show", as: "cart"
-delete 'carts/:id' => "carts#destroy"
+  get 'stock_report/', to: "categories#stock_report"
+  get '/ticket/:address_id', to: "items#ticket", :as => 'ticket'
 
-post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
-post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
-# post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
-post 'line_items' => "line_items#create"
-get 'line_items/:id' => "line_items#show", as: "line_item"
-delete 'line_items/:id' => "line_items#destroy"
+  post '/add_item/:item_id' => 'items#add_item', :as => 'add_item'
+  delete 'item/:id' => "items#destroy"
 
-# delete 'items/:id' => "items#remove_item_from(cart)"
-
-get 'stock_report/', to: "categories#stock_report"
-resources :orders
-
-post '/add_item/:item_id' => 'items#add_item', :as => 'add_item'
-delete 'item/:id' => "items#destroy"
-
-get '/auth/facebook/callback', to: 'sessions#create'
+  get '/auth/facebook/callback', to: 'sessions#create'
 
 end
-
-
-# ..........
-
-#  root "static_pages#home"
-#   get "/signin", to: "sessions#new"
-#   post "/sessions/create", to: "sessions#create"
-#   delete "/signout", to: "sessions#destroy"
-#   post "/rides/new", to: "rides#new"
-#   resources :attractions
-#   resources :users

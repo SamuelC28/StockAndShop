@@ -10,21 +10,33 @@
                 <% category.items.each do |item| %>
                   <div class="contaianer">
                      <div class="row">
-                       <div class="col-md-3">
+                       <div class="col col-md-3">
+                         
                           <img class="item-img-show" src="<%= (url_for(item.photo)) %>" alt="Item image"><br>
-                 
-                            <strong><%= link_to "#{ item.item_name }", item_path(item) %></strong>
-                            <strong><%= number_to_currency(item.unit_price) %></strong>
-                     
-                            <% if author_own(item) && current_user.admin %> 
+
+                              <%= render partial: "items/item", locals: {item: item} %>
+                              
+                              <script type="text/javascript" charset="utf-8">
+                              $(function () {
+                              $(".js-more").on('click', function() {
+                                    // get the id from the data attribute
+                                 let id = $(this).data("id");
+                                 $.getJSON("/items/" + id + "/item_data", function(data) {
+                                    // Replace text of body-id div
+                                   $("#body-" + id).html(data["desc"]);
+                                 });
+                               });
+                              });
+                              </script>
+
+                            <% if author_own(item) && current_user == item.user%> 
                                <%= link_to "Edit", edit_item_path(item) %> |
                                <%= link_to "Delete", item_path(item), method: :delete, data: { confirm: 'Are You Sure?'} %> 
                             <% end %>
-                           </div>
+                       </div>
                  <% end %>             
          <% end %>
-                         </div>
-                     </div>
+                  </div>
  
       <% elsif @categories.any? && !current_user.admin %>
                <% @categories.each do |category|%>
@@ -34,19 +46,31 @@
                         <div class="row">
                            <div class="col-md-3">
                              <img class="item-img-show" src="<%= (url_for(item.photo)) %>" alt="Item image"><br>
-                              <strong><%= link_to "#{ item.item_name }", item_path(item) %></strong><br>
+
+
+                               <%= render partial: "items/item", locals: {item: item} %>
+                              
+                              <script type="text/javascript" charset="utf-8">
+                              $(function () {
+                              $(".js-more").on('click', function() {
+                                    // get the id from the data attribute
+                                 let id = $(this).data("id");
+                                 $.getJSON("/items/" + id + "/item_data", function(data) {
+                                    // Replace text of body-id div
+                                   $("#body-" + id).html(data["desc"]);
+                                 });
+                               });
+                              });
+                              </script>
                               <%= link_to 'Go to Cart', item_path(item) %>
                            </div>
                            
               
                      <% end %>
                <% end %>
-                </div>
-                 </div>
+                        </div>
+                     </div>
                
-              
-         
-            
       
       <% elsif !@categories.any? && current_user.admin %>
             <p><strong>No Item has Been Yet registered! </strong></p>
@@ -57,10 +81,15 @@
 
 
       <% if current_user.admin %>
-         <h4><strong> <%= link_to 'Add New Items', new_item_path %></h4>
+         <div class="back-to-preorder-oder"><h4><strong> <%= link_to 'Add New Items', new_item_path, class: "btn btn-primary btn-light"%></h4></div>
       <% end %>
-   </div>
+         </div>
 </div>
 
+<div class="back-to-preorder">
+    <% if (session[:cart] && !session[:cart].empty?) && !current_user.admin %>
+        <%= link_to 'Finish up you previous order', items_path, class: "btn btn-primary btn-light"%>
+   <% end %>
+</div>
 
         

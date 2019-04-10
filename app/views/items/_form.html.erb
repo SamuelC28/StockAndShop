@@ -1,32 +1,37 @@
 
 <div class="form-group">
-<div class="col-md-6 col-md-offset-3">
-<%= form_for(@item) do |f| %>
-<%= f.label :category_name, "Choose Or Create A Category:" %><br>
-<%= f.collection_check_boxes :category_ids, Category.all, :id, :category_name do |c| %>
-<% c.label(class: "checkbox-inline input_checkbox") {c.check_box(class: "checkbox") + c.text} %>
-<%end%> 
-<%= link_to "Add a Category", new_category_path, class: "btn btn-primary btn-light" %>
-<br><br>
+    <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@item) do |f| %>
+        <%= f.label :category_name, "Choose Or Create A Category:" %><br>
+            <%= f.collection_check_boxes :category_ids, Category.all, :id, :category_name do |c| %>
+            <% c.label(class: "checkbox-inline input_checkbox") {c.check_box(class: "checkbox") + c.text} %>
+        <%end%> 
+        <%= link_to "Add a Category", new_category_path, class: "btn btn-primary btn-light" %>
+        <br><br>
 
-<%= f.label :item_name %> <br>
-<%= f.text_field :item_name, placeholder: "Item Name", class: "form-control" %><br>
-<%= f.label :unit_price %><br>
-<%= f.text_field :unit_price, placeholder: "Unit Price", class: "form-control" %><br>
-<%= f.label :tax %><br>
-<%= f.text_field :tax, placeholder: "Tax", class: "form-control" %><br>
+        <%= f.label :item_name %> <br>
+        <%= f.text_field :item_name, placeholder: "Item Name", class: "form-control" %><br>
 
-<%= f.label :quantity %><br>
-<%= f.number_field :quantity, placeholder: "Quantity", class: "form-control" %><br>
-<%= f.label :isbn %><br>
-<%= f.text_field :isbn, placeholder: "ISBN", class: "form-control" %><br>
+        <%= f.label :unit_price %><br>
+        <%= f.text_field :unit_price, placeholder: "Unit Price", class: "form-control" %><br>
 
-<%= f.label :desc %><br>
-<%= f.text_field :desc, placeholder: "DESC", class: "form-control" %><br>
-<%= f.label :photo %><br>
-<%= f.file_field :photo, class: "form-control" %><br>
 
-<%= f.submit "Add Item", class: "btn btn-primary" %>
-<% end %>
-</div>
+        <%= f.label :tax %><br>
+        <%= f.text_field :tax, placeholder: "Tax", class: "form-control" %><br>
+
+        <%= f.label :quantity %><br>
+        <%= f.number_field :quantity, placeholder: "Quantity", class: "form-control" %><br>
+
+        <%= f.label :isbn %><br>
+        <%= f.text_field :isbn, placeholder: "ISBN", class: "form-control" %><br>
+
+        <%= f.label :Description %><br>
+        <%= f.text_area :desc, placeholder: "Description", class: "form-control" %><br>
+
+        <%= f.label :photo %><br>
+        <%= f.file_field :photo, class: "form-control" %><br>
+
+        <%= f.submit "Add Item", class: "btn btn-primary" %>
+    <% end %>
+    </div>
 </div>

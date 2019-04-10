@@ -1,19 +1,20 @@
 
-<br><br><br>
-<h1>Welcome, <%= @user.fullname %>!</h1>
-<h4><strong>You are have sucessfully registered. <br><br>Your Profile:</h4>
-<p><strong> Full-name: <%= @user.fullname %></p>
-<p><strong> Email: <%= @user.email %></p>
+<div class="bg-text">
+   <h1>Welcome, <%= @user.fullname %>!</h1>
+   <h4><strong>You are have sucessfully registered. <br><br>Your Profile:</h4>
+   <p><strong> Full-name: <%= @user.fullname %></p>
+   <p><strong> Email: <%= @user.email %></p>
 
-<div class="info">
+   <div class="info">
 
-    <% if current_user.admin %>
-      <p>Status: ADMIN</p>
-      <h2>View all Products <%= link_to "click here", categories_path%></h2>
-      <h2>Add Products <%= link_to "click here", new_item_path%></h2>
-    <% else %>
-    <p>Status: CUSTOMER</p>
-       <h2>See Our Products <%= link_to "click here", categories_path%></h2>
-    <% end %>
+      <% if current_user.admin %>
+         <p>Status: ADMIN</p>
+         <h4><strong>View all Products <%= link_to "click here", categories_path%></strong></h4>
+         <h4><strong>Add Products <%= link_to "click here", new_item_path%></strong></h4>
+      <% else %>
+      <p>Status: CUSTOMER</p>
+         <h4><strong>View Our Products <%= link_to "click here", categories_path%></strong></h4>
+      <% end %>
 
- </div>
+   </div>
+</div>

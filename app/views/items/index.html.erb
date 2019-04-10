@@ -2,36 +2,40 @@
 
 <br><br><br>
 <div class="container">
-<div class="row">
-    <h2><strong>Your Cart</strong></h2>
+    <div class="bg-text-report">
+    <!--<div class="row">-->
 
-    <% if !session[:cart].nil? && !current_user.admin %>
-        <table class="table table-dark">
-        <thead>
-            <tr>
-                <th scope="col">Quantity</th>
-                <th scope="col">Product</th>
-                <th scope="col">Sub Total</th>                 
-                <th scope="col">Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% session[:cart].each_with_index do |item| %>
+        <h2><strong>Your Cart</strong></h2>
+
+        <% if !session[:cart].nil? && !current_user.admin %>
+            <table class="table table-dark">
+                <thead>
                 <tr>
-                <td> <strong><%= item["chosen_quantity"]%> </strong></td>
-                <td> <strong><%= item['item_name']%></strong></td>
-                <td> <strong><%= number_to_currency(item['unit_price']) %></strong></td>
-            <% end %>  
-                <td><strong><%= number_to_currency(get_total_price(session[:cart])) %></strong> </td>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Sub Total</th>                 
+                    <th scope="col">Total</th>
                 </tr>
-            </tbody>
-        </table>
-    <p><%= link_to 'Select More items!', categories_path, class: "btn btn-primary btn-light"%></p>
-        <%= button_to "Submit Oder", logout_session_path, method: :delete, class: "btn btn-primary btn-light" %>
-    <% else %>
-        <p><strong>You Do Not Have Any Rights To Purchase. You Must first Login / Register As A Customer!</strong></p>
-        <%= link_to "Back to All Items", categories_path, class: "btn btn-primary btn-light" %>
-    <% end %>
+                </thead>
+                <tbody>
+                    <% session[:cart].each do |item| %>
+                    <tr>
+                    <td> <strong><%= item["chosen_quantity"]%> </strong></td>
+                    <td> <strong><%= item['item_name']%></strong></td>
+                    <td> <strong><%= number_to_currency(item['unit_price']) %></strong></td>
+                    <% end %>  
+                    <td><strong><%= number_to_currency(get_total_price(session[:cart])) %></strong> </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><%= link_to 'Select More items!', categories_path, class: "btn btn-primary btn-light"%></p>
+            <%= link_to "Add Your Address", new_address_path, class: "btn btn-primary btn-light" %>
+        <% else %>
+            <p><strong>You Do Not Have Any Rights To Purchase. You Must first Login / Register As A Customer!</strong></p>
+            <%= link_to "Back to All Items", categories_path, class: "btn btn-primary btn-light" %>
+        <% end %>
+    </div>
 </div>
 
 

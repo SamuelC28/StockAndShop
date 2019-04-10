@@ -1,0 +1,5 @@
+<p><%= item.id %>: <strong><%= link_to "#{ item.item_name }", item_path(item) %></strong></p>
+<div id="body-<%= item.id %>"><%= number_to_currency(item.unit_price) %></div>
+<div id="body-<%= item.id %>"><%= truncate item.desc %></div>
+
+<button class="js-more" data-id="<%= item.id %>">More...</button>

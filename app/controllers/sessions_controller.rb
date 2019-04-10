@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
     def destroy
       session.delete :user_id # or session[:user_id] = nil
-      session[:cart].clear
+      # session[:cart].clear
       redirect_to root_url
     end
   
@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
 
           if @user && @user.authenticate(params[:user][:password])
              session[:user_id] = @user.id
-             edirect_to categories_path
+             redirect_to categories_path
           else
             redirect_to signin_path #or redirect_to signin_session_path
           end

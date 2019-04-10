@@ -1,0 +1,51 @@
+ <br><br><br>
+
+<div class="container">
+    
+    <div class="row">
+    <h1><strong>Thank You For Buying!</strong></h1>
+        <div class="bg-text-tiket">
+        <div class="title"><h2><strong>Your ticket!</strong></h2></div>
+        <% if !session[:cart].nil? && !current_user.admin %>
+         <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Quantity</th>
+                <th scope="col">Product</th>
+                <th scope="col">Sub Total</th>                 
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% session[:cart].each_with_index do |item| %>
+              <tr>
+                <td> <strong><%= item["chosen_quantity"]%> </strong></td>
+                <td> <strong><%= item['item_name']%></strong></td>
+                <td> <strong><%= number_to_currency(item['unit_price']) %></strong></td>
+            <% end %>  
+                <td><strong><%= number_to_currency(get_total_price(session[:cart])) %></strong> </td>
+              </tr>   
+            </tbody>
+         </table>
+        <% end %>
+        </div>
+    </div>
+   
+    <p>
+      <strong>
+        Your Order will be sent soon at: 
+        <%= @address.street %>, 
+        <%= @address.city %>,
+        <%= @address.postal_code %>, 
+        <%= @address.state %>, 
+        <% @address.country %>. 
+      <strong>
+    </p>
+
+    <p><strong>Receiver: <%= @address.receiver%></strong> </p>
+    <p><strong>Phone: <%= @address.phone%></strong> </p>
+     <% empty(session[:cart]) %>
+
+</div>
+
+  

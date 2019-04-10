@@ -1,49 +1,72 @@
 
 <br><br><br>
-<div class="center">
- 
 
-
-  
- 
 <div class="contaianer">
-      <img class="item-img-show" src="<%= (url_for(@item.photo))%>" alt="Item image">
+     <h3><strong><a href="#" class="js-next" data-id="<%=@item.id%>">Next...</a></strong></h3>
+    <img  class="item-show" src="<%= (url_for(@item.photo))%>" alt="item image">
+  
     <div class="row">
       <div class="bg-text">
-          <div class="col-md-3">   
-              <p><strong> Phone Type: <%= @item.item_name %></p>
-              <p><strong> Unit Price: $<%= @item.unit_price %></p>
-              <p><strong> Tax: <%= @item.tax %></p>
-              <p><strong> Quantity: <%= @item.quantity %></p>
-              <p><strong> ISBN: <%= @item.isbn %></p>
-              <p><strong> DESCRIPTIONs: <%= @item.desc%></p>
-          </div>     
-        </div>
+        <div class="col-md-3">   
+
+        <h4 class="itemName"><strong> Item Name:<%= @item.item_name  %></h4>
+        <p class="itemUnitPrice"> <strong> Unit Price:<%=  @item.unit_price %></p>
+        <p class="itemQuantity"><%= @item.quantity - (@item.chosen_quantity + 1) %></p>
+        <p class="itemTax"><strong> Tax:<%= @item.tax  %></p>
+        <p class="itemIsbn"><strong> ISBN:<%= @item.isbn %></p>
+        <p class="itemBody"><strong> DESCRIPTIONs: <%= @item.desc %></p>
+
+        <script type="text/javascript" charset="utf-8">
+        $(function () {
+          $(".js-next").on("click", function(e) {
+            e.preventDefault();
+            var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+            $.getJSON("/items/" + nextId + "/item_data", function(data) {
+              $(".item-show").file(data["url_for(photo)"])%>);
+              $(".itemName").text(data["item_name"]);
+              $(".itemUnitPrice").text(data["unit_price"]);
+              $(".itemQuantity").text(data["quantity"]);
+              $(".itemIsbn").text(data["isbn"]);
+              $(".itemTax").text(data["tax"]);
+              $(".itemBody").text(data["desc"]);
+              // re-set the id to current on the link
+              $(".js-next").attr("data-id", data["id"]);
+            });
+          });
+        });
+        </script>
+        </div>     
+      </div>
    </div>
-   
-            <% if current_user.admin %>
-            <p><%= link_to 'Edit item', edit_item_path(@item) %></p>
-            <% else %>
-            <%= form_for :categorization, url: '/categorizations/new' do |f| %>
-            <%= f.hidden_field :category_id, value: "#{@category.id}" %> 
-            <%= f.hidden_field :item_id, value: "#{@item.id}" %>
-            <%= f.hidden_field :user_id, value: "#{current_user.id}" %>
-            <% end %>
-            <% end %>
+
+  <div class="edit-item">
+    <% if current_user.admin %>
+        <p><%= link_to 'Edit item', edit_item_path(@item), class: "btn btn-primary" %></p>
+    <% else %>
+      <%= form_for :categorization, url: '/categorizations/new' do |f| %>
+        <%= f.hidden_field :category_id, value: "#{@category.id}" %> 
+        <%= f.hidden_field :item_id, value: "#{@item.id}" %>
+        <%= f.hidden_field :user_id, value: "#{current_user.id}" %>
+      <% end %>
+    <% end %>
+  </div>
       
       
-      <div class="col-md-6 col-md-offset-3">
-          <%= form_for(@item) do |f| %>
-              <%= f.select :chosen_quantity, ((0..50).map {|i| [i,i] } << ["No limit",nil]) %>
-              <%= f.submit "Add Quantity", class: "btn btn-primary" %>
-          <% end %>
-     </div>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="add-to-cart">
+      <% if !current_user.admin %> 
+        <%= button_to "Add to Cart", add_item_path(:item_id => @item), :method => :item %>
+        <%= form_for(@item) do |f| %>
+            <%= f.select :chosen_quantity, ((1..50).map {|i| [i,i] } << ["No limit",nil]) %>
+            <%= f.submit "Add Quantity", class: "btn btn-primary" %>
+        <% end %>    
+      <% end %>
+    </div>
+  </div>
+
+
+
+  <div class ="back-to">
+    <p><%= link_to 'Back To All Items!', categories_path, class: "btn btn-primary btn-light"%></p>
+  </div>
 </div>
-
-
-
-
-<p><%= link_to 'Back To All Items!', categories_path, class: "btn btn-primary btn-light"%></p>
-
- 
- <%= button_to "Add to Cart", add_item_path(:item_id => @item), :method => :post %>

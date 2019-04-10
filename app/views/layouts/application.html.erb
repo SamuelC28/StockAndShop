@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>StockInventory</title>
+    <title>StockAndShop</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -27,10 +28,11 @@
             <% else %>
 
                <li><%= link_to 'All Products', categories_path, class: "navbar-brand" %></li>
-               <li><%= link_to "Log Out", logout_session_path, method: :delete, class: "navbar-brand" %></li>
                <% if current_user.admin %>
                   <li><%= link_to "Stock Report", stock_report_path() , class: "navbar-brand"%></li>
               <% end %>
+               <li><%= link_to "#{current_user.fullname} "+"Log Out", logout_session_path, method: :delete, class: "navbar-brand" %></li>
+               
             <% end %>
           </ul>
         </div>

@@ -1,10 +1,10 @@
 
 <div class="form-group">
-<div class="col-md-6 col-md-offset-3">
-<%= form_for(@item) do |f| %>
-    <%= f.select :chosen_quantity, ((0..50).map {|i| [i,i] } << ["No limit",nil]) %>
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@item) do |f| %>
+            <%= f.select :chosen_quantity, ((0..50).map {|i| [i,i] } << ["No limit",nil]) %>
 
-<%= f.submit "Add Quantity", class: "btn btn-primary" %>
-<% end %>
-</div>
+        <%= f.submit "Add Quantity", class: "btn btn-primary" %>
+        <% end %>
+    </div>
 </div>

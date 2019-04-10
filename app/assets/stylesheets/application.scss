@@ -14,7 +14,13 @@
  * It is generally better to create a new file per style scope.
  *
  
- */
+//  */
+ .item-img-show {
+  max-width: 30%;
+  height: 150px;
+  padding: 5px;
+  margin: 5%;
+}
 
  .limiter {
   width: 100%;
@@ -39,6 +45,7 @@
 
 .wrap-login100 {
   width: 500px;
+  height: auto;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -51,10 +58,7 @@
   background-color: #f3eded;
 }
 
- .item-img-show {
-    max-width: 20%;
-    height: auto;
-}
+
 
 .login100-form-title {
   display: block;
@@ -95,8 +99,31 @@
 	display: flex;
 	justify-content: center;
 	-ms-align-items: center;
-	align-items: center;
+  align-items: center;
+  transform: translate(15%, -75%);
 }
+
+
+// .fa {
+//     padding: 20px;
+//     font-size: 30px;
+//     width: 50px;
+//     text-align: center;
+//     text-decoration: none;
+//   }
+  
+//   /* Add a hover effect if you want */
+//   .fa:hover {
+//     opacity: 0.7;
+//   }
+  
+//   /* Set a specific color for each brand */
+  
+//   /* Facebook */
+//   .fa-facebook {
+//     background: #3B5998;
+//     color: white;
+//   }
 
 
 .info {
@@ -141,11 +168,107 @@
   font-weight: bold;
   border: 3px solid #f1f1f1;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 65%;
+  left: 60%;
   transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 40%;
+  z-index: -2;
+  width: 55%;
+  height: auto;
+  padding: 10px;
+  text-align: center-right;
+}
+
+.item-show {
+  position: absolute;
+  top: 16%;
+  left: 10%;
   padding: 20px;
-  text-align: center-left;
+  max-width: 22%;
+  height: auto;
+}
+.item-descrition {
+  text-align: right;
+}
+.edit-item {
+  position: absolute;
+  top: 16%;
+  right: 22%;
+  padding: 25px;
+}
+
+.add-to-cart {
+  position: absolute;
+  top: 16%;
+  right: -15%;
+  padding: 30px;
+  // transform: translate(212%, 38%);
+}
+.back-to {
+  position: absolute;
+  top: 16%;
+  right: 11%;
+  padding: 25px;
+}
+
+.back-to-preorder-oder {
+  position: fixed;
+  top: 10%;
+  right: 11%;
+  padding: 25px;
+
+}
+
+.bg-text-report{
+  // background-color: rgb(0,0,0); /* Fallback color */
+  // background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: rgb(70, 15, 15);
+  font-weight: bold;
+  border: 3px solid #1d1414;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-70%, -30%);
+  z-index: -2;
+  width: 55%;
+  height: auto;
+  padding: 50px;
+  text-align: center-right;
+
+}
+.bg-text-tiket {
+  color: rgb(70, 15, 15);
+  font-weight: bold;
+  border: 3px solid #1d1414;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-70%, -30%);
+  z-index: -2;
+  width: 55%;
+  height: auto;
+  padding: 40px;
+  text-align: center-right;
+
+}
+.title {
+  // transform: translate(-70%, 50%);
+  padding: 8px;
+  // top: 50%;
+  // right: 50%;
+}
+.welcom-page {
+
+  color: rgb(70, 15, 15);
+  font-weight: bold;
+  border: 3px solid #1d1414;
+  position: absolute;
+  top: 55%;
+  left: 60%;
+  transform: translate(-70%, -50%);
+  z-index: -2;
+  width: 55%;
+  height: auto;
+  padding: 50px;
+  text-align: center;
+
 }

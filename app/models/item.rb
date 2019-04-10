@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-    before_destroy :not_referenced_any_line_item
+    # before_destroy :not_referenced_any_line_item
     default_scope { order('created_at DESC') }
 
     validates_uniqueness_of :isbn
@@ -12,15 +12,16 @@ class Item < ApplicationRecord
    
     validates_length_of :isbn, :minimum => 12
     validates_uniqueness_of :isbn
+    # validates :photo_type_acceptation, presence
+     
     
     has_many :categorizations
     has_many :categories, :through => :categorizations
-    has_many :line_items
+    # has_many :line_items
     # belongs_to :cart
     belongs_to :user, optional: true
 
     has_one_attached :photo
-    has_many :line_items, dependent: :destroy ###
     # mount_uploader :image, ImageUploader
     # serialize :image, JSON #for Sqlite only
 
@@ -30,23 +31,26 @@ class Item < ApplicationRecord
 
 
 
-    def not_referenced_any_line_item
-      unless line_items.empty?
-        errors.add(:base, "Line is not present")
-        throw :abort
-      end
+    # def not_referenced_any_line_item
+    #   unless line_items.empty?
+    #     errors.add(:base, "Line is not present")
+    #     throw :abort
+    #   end
 
-    end
+    # end
  
     
 
-  #  def sub_total
-  #   sum = 0
-  #   self.line_items.each do |line_item|
-  #     sum+= line_item.total_price
-  #   end
-  #   return sum
-  # end
+  private
+    def photo_type_acceptation
+      if photo.attached? && !photo.content_type.in?(%w(image/jpeg image/png))
+        errors.add(:photo , "must be a JPEG or PNG")
+      end
+    end
+
+    def photo?
+      errors.add(:base, 'Please upload a featured image!') unless photo.attached?
+    end
 
   
 end

@@ -21,9 +21,8 @@ class AddressesController < ApplicationController
     @address.user_id = current_user.id
 
     if @address.save
-       redirect_to addresses_path 
-    else
-      render :new 
+       redirect_to ticket_path(@address)
+      # render :new 
     end
     
   end
@@ -54,7 +53,7 @@ class AddressesController < ApplicationController
     end
 
     def set_address
-      @address = Address.find(params[:id])
-      @address.user_id
+      @address = Address.find_by(id: params[:id])
+      # @address.user_id
    end
 end
